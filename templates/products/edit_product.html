@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product | Fashion.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #111111;
+            --secondary: #666666;
+            --accent: #b8977e;
+            --bg-light: #f9f9f9;
+            --bg-white: #ffffff;
+            --border: #e5e5e5;
+            --font-sans: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--primary);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            padding-top: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Form Box */
+        .form-box {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            margin-top: 40px;
+            margin-bottom: 80px;
+        }
+
+        .form-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--bg-white);
+            border: 1px solid var(--primary);
+            padding: 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .messages {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            background-color: #fce8e6;
+            color: #c5221f;
+            border: 1px solid #fad2cf;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar container">
+            <a href="{% url 'index' %}" class="logo">fashion.com</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'products:product_list' %}">Shop Catalog</a></li>
+                <li><a href="{% url 'products:add_product' %}">Add Product</a></li>
+                <li><a href="{% url 'products:cart_detail' %}">Cart</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="form-box">
+            <h1 class="form-title">Edit Product Details</h1>
+            <p class="form-subtitle">Update information for product: <strong>{{ product.name }}</strong></p>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <form method="POST" action="{% url 'products:update_product' product.pk %}">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label class="form-label" for="name">Product Name *</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ product.name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="category">Category</label>
+                    <select id="category" name="category" class="form-control">
+                        <option value="Women" {% if product.category == 'Women' %}selected{% endif %}>Women</option>
+                        <option value="Men" {% if product.category == 'Men' %}selected{% endif %}>Men</option>
+                        <option value="Accessories" {% if product.category == 'Accessories' %}selected{% endif %}>Accessories</option>
+                        <option value="Other" {% if product.category == 'Other' or not product.category %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="price">Price ($ USD) *</label>
+                    <input type="number" id="price" name="price" step="0.01" class="form-control" value="{{ product.price }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="stock">Stock Available</label>
+                    <input type="number" id="stock" name="stock" class="form-control" value="{{ product.stock }}" min="0">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="image_url">Image URL</label>
+                    <input type="url" id="image_url" name="image_url" class="form-control" value="{{ product.image_url|default_if_none:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea id="description" name="description" class="form-control">{{ product.description }}</textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Save Changes</button>
+            </form>
+
+            <a href="{% url 'products:product_list' %}" class="back-link">&larr; Cancel and Go Back</a>
+        </div>
+    </main>
+
+</body>
+</html>

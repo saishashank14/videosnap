@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Fashion.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #111111;
+            --secondary: #666666;
+            --accent: #b8977e;
+            --bg-light: #f9f9f9;
+            --bg-white: #ffffff;
+            --border: #e5e5e5;
+            --font-sans: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--primary);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            padding-top: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* Success View styling */
+        .success-box {
+            background-color: var(--bg-white);
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            max-width: 600px;
+            margin: 40px auto 80px auto;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #137333;
+            margin-bottom: 24px;
+        }
+
+        .success-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .success-text {
+            color: var(--secondary);
+            margin-bottom: 35px;
+        }
+
+        .btn-shop {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--bg-white);
+            padding: 12px 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-shop:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        /* Checkout Grid */
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            margin-top: 40px;
+            margin-bottom: 80px;
+        }
+
+        .checkout-form-box {
+            background-color: var(--bg-white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        }
+
+        .checkout-section-title {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Order Review Box */
+        .order-review {
+            background-color: var(--bg-white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            height: max-content;
+        }
+
+        .review-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .review-item-name {
+            font-weight: 500;
+            max-width: 70%;
+        }
+
+        .review-item-price {
+            color: var(--secondary);
+        }
+
+        .review-totals {
+            margin-top: 20px;
+        }
+
+        .review-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .review-row.grand-total {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .btn-order {
+            display: block;
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--bg-white);
+            text-align: center;
+            padding: 14px 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--primary);
+            margin-top: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-order:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        @media (max-width: 991px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+            .order-review {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar container">
+            <a href="{% url 'index' %}" class="logo">fashion.com</a>
+        </div>
+    </header>
+
+    <main class="container">
+        {% if success %}
+        <!-- Checkout success / Thank You page -->
+        <div class="success-box">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">Order Placed Successfully!</h1>
+            <p class="success-text">Thank you for your purchase. We are processing your order and will email you with shipment details shortly.</p>
+            <a href="{% url 'products:product_list' %}" class="btn-shop">Continue Shopping</a>
+        </div>
+        {% else %}
+        <!-- Checkout page with shipping form -->
+        <div class="checkout-grid">
+            <div class="checkout-form-box">
+                <form method="POST" action="{% url 'products:checkout' %}">
+                    {% csrf_token %}
+                    
+                    <h2 class="checkout-section-title">Shipping Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="first_name">First Name *</label>
+                            <input type="text" id="first_name" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="last_name">Last Name *</label>
+                            <input type="text" id="last_name" name="last_name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="address">Street Address *</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="123 Main St, Apt 4" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="city">City *</label>
+                            <input type="text" id="city" name="city" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="zip_code">ZIP / Postal Code *</label>
+                            <input type="text" id="zip_code" name="zip_code" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <h2 class="checkout-section-title" style="margin-top: 40px;">Payment Details</h2>
+                    <div class="form-group">
+                        <label class="form-label" for="card_name">Name on Card *</label>
+                        <input type="text" id="card_name" name="card_name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="card_number">Card Number *</label>
+                        <input type="text" id="card_number" name="card_number" class="form-control" placeholder="•••• •••• •••• ••••" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="exp_date">Expiration Date *</label>
+                            <input type="text" id="exp_date" name="exp_date" class="form-control" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="cvv">CVV *</label>
+                            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="•••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-order">Place Order (${{ total|floatformat:2 }})</button>
+                </form>
+            </div>
+
+            <!-- Summary panel -->
+            <div class="order-review">
+                <h2 class="checkout-section-title">Order Summary</h2>
+                
+                {% for item in items %}
+                <div class="review-item">
+                    <span class="review-item-name">{{ item.product.name }} (x{{ item.quantity }})</span>
+                    <span class="review-item-price">${{ item.total_price }}</span>
+                </div>
+                {% endfor %}
+
+                <div class="review-totals">
+                    <div class="review-row">
+                        <span>Subtotal</span>
+                        <span>${{ subtotal|floatformat:2 }}</span>
+                    </div>
+                    <div class="review-row">
+                        <span>Shipping</span>
+                        {% if shipping == 0 %}
+                        <span style="color: #137333;">Free</span>
+                        {% else %}
+                        <span>${{ shipping|floatformat:2 }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="review-row grand-total">
+                        <span>Grand Total</span>
+                        <span>${{ total|floatformat:2 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+</body>
+</html>

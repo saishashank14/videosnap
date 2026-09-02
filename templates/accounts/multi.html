@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplication</title>
+</head>
+<body>
+    <div>
+        <h2>Multiplication</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label>a_value</label>
+            <input type="number" name="a_value" value="{{ a_value }}" required><br>
+            <label>b_value</label>
+            <input type="number" name="b_value" value="{{ b_value }}" required>
+            <button type="submit">multiplication</button>
+        </form>
+
+        {% if c != "" %}
+        <div class="result">Result: {{ c }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
