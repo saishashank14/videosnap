@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 User = get_user_model()
 
 def home(request):
-    return render(request, "landing page/index9.html")
+    return render(request, "landing page/index.html")
 
 def signup_view(request):
     if request.user.is_authenticated:
