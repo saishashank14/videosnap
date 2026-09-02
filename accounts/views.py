@@ -49,8 +49,10 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect("home")
 
-  
-  
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
+
         if not username or not password:
             messages.error(request, "Username and password are required.")
             return redirect("login")
