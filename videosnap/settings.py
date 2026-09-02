@@ -78,12 +78,8 @@ WSGI_APPLICATION = 'videosnap.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.vmphlfkvdschxyrqsdxo',
-        'PASSWORD': 'Saishashank@123',
-        'HOST': 'aws-0-ap-northeast-1.pooler.supabase.com',  # Or your database server IP
-        'PORT': '5432',       # Default MySQL port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
